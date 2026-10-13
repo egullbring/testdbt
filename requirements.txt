@@ -1,0 +1,2 @@
+# Keep dbt Core and the Databricks adapter on the same minor release line.
+dbt-databricks~=1.11.0
