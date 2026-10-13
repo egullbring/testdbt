@@ -28,6 +28,11 @@ jobs:
       - name: Install dbt packages
         run: dbt deps
 
+      - name: Configure dbt profile
+        run: |
+          mkdir -p ~/.dbt
+          cp profiles.yml.example ~/.dbt/profiles.yml
+
       - name: Validate project
         run: dbt parse --target ci
 
