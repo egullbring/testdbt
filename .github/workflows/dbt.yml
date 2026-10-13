@@ -16,7 +16,6 @@ jobs:
       DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
       DATABRICKS_HTTP_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
       DATABRICKS_CATALOG: ${{ vars.DATABRICKS_CATALOG }}
-      DATABRICKS_AZURE_TENANT_ID: ${{ secrets.DATABRICKS_AZURE_TENANT_ID }}
       DATABRICKS_AZURE_CLIENT_ID: ${{ secrets.DATABRICKS_AZURE_CLIENT_ID }}
       DATABRICKS_AZURE_CLIENT_SECRET: ${{ secrets.DATABRICKS_AZURE_CLIENT_SECRET }}
     steps:
@@ -41,17 +40,10 @@ jobs:
           cp profiles.yml.example ~/.dbt/profiles.yml
 
       - name: Validate project
-        env:
-          DATABRICKS_HOST: https://127.0.0.1
-          DATABRICKS_HTTP_PATH: /sql/1.0/warehouses/0000000000000000
-          DATABRICKS_CATALOG: main
-          DATABRICKS_AZURE_TENANT_ID: 00000000-0000-0000-0000-000000000000
-          DATABRICKS_AZURE_CLIENT_ID: 00000000-0000-0000-0000-000000000000
-          DATABRICKS_AZURE_CLIENT_SECRET: parse-only-placeholder
-        run: dbt parse --target ci
+        run: dbt parse --target parse
 
       - name: Build and test models on Databricks
-        if: ${{ env.DATABRICKS_HOST != '' && env.DATABRICKS_HTTP_PATH != '' && env.DATABRICKS_CATALOG != '' && env.DATABRICKS_AZURE_TENANT_ID != '' && env.DATABRICKS_AZURE_CLIENT_ID != '' && env.DATABRICKS_AZURE_CLIENT_SECRET != '' }}
+        if: ${{ env.DATABRICKS_HOST != '' && env.DATABRICKS_HTTP_PATH != '' && env.DATABRICKS_CATALOG != '' && env.DATABRICKS_AZURE_CLIENT_ID != '' && env.DATABRICKS_AZURE_CLIENT_SECRET != '' }}
         env:
           DATABRICKS_SCHEMA: ci_${{ github.run_id }}_${{ github.run_attempt }}
         run: dbt build --target ci

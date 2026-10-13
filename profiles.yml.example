@@ -1,13 +1,20 @@
 customer_project:
   target: dev
   outputs:
+    parse:
+      type: databricks
+      host: https://localhost
+      http_path: /sql/1.0/warehouses/parse-only
+      catalog: main
+      schema: dbt_parse
+      token: parse-only
+      threads: 1
     dev:
       type: databricks
       host: "{{ env_var('DATABRICKS_HOST', 'not-configured') }}"
       http_path: "{{ env_var('DATABRICKS_HTTP_PATH', 'not-configured') }}"
       catalog: "{{ env_var('DATABRICKS_CATALOG', 'main') }}"
       schema: "{{ env_var('DATABRICKS_SCHEMA', 'dbt_dev') }}"
-      azure_tenant_id: "{{ env_var('DATABRICKS_AZURE_TENANT_ID', 'not-configured') }}"
       azure_client_id: "{{ env_var('DATABRICKS_AZURE_CLIENT_ID', 'not-configured') }}"
       azure_client_secret: "{{ env_var('DATABRICKS_AZURE_CLIENT_SECRET', 'not-configured') }}"
       auth_type: azure-client-secret
@@ -18,7 +25,6 @@ customer_project:
       http_path: "{{ env_var('DATABRICKS_HTTP_PATH', 'not-configured') }}"
       catalog: "{{ env_var('DATABRICKS_CATALOG', 'main') }}"
       schema: "{{ env_var('DATABRICKS_SCHEMA', 'dbt_ci') }}"
-      azure_tenant_id: "{{ env_var('DATABRICKS_AZURE_TENANT_ID', 'not-configured') }}"
       azure_client_id: "{{ env_var('DATABRICKS_AZURE_CLIENT_ID', 'not-configured') }}"
       azure_client_secret: "{{ env_var('DATABRICKS_AZURE_CLIENT_SECRET', 'not-configured') }}"
       auth_type: azure-client-secret

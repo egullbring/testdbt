@@ -12,7 +12,6 @@ dbt Core project for Azure Databricks using the `dbt-databricks` adapter.
    - `DATABRICKS_HOST`: workspace URL, for example `https://adb-....azuredatabricks.net`
    - `DATABRICKS_HTTP_PATH`: HTTP Path for the SQL warehouse
    - `DATABRICKS_CATALOG`: Unity Catalog catalog name
-   - `DATABRICKS_AZURE_TENANT_ID`: Microsoft Entra tenant ID
    - `DATABRICKS_AZURE_CLIENT_ID`: Azure service principal application/client ID
    - `DATABRICKS_AZURE_CLIENT_SECRET`: Azure service principal client secret
    - `DATABRICKS_SCHEMA` (optional): development schema; defaults to `dbt_dev`
@@ -34,7 +33,6 @@ Add these repository Actions secrets in **Settings → Secrets and variables →
 
 - `DATABRICKS_HOST`
 - `DATABRICKS_HTTP_PATH`
-- `DATABRICKS_AZURE_TENANT_ID`
 - `DATABRICKS_AZURE_CLIENT_ID`
 - `DATABRICKS_AZURE_CLIENT_SECRET`
 
